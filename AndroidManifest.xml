@@ -34,7 +34,7 @@
             android:name=".ing.IngCercaPersone"
             android:windowSoftInputMode="stateVisible|adjustPan" >
         </activity>
-        <activity android:name=".activity.AteneoHomeActivity" >
+        <activity android:name=".ateneo.AteneoHomeActivity" >
         </activity>
         <activity android:name=".ing.IngEventiActivity" >
         </activity>

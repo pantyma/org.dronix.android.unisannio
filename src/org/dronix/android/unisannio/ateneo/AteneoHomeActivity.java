@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.dronix.android.unisannio.activity;
+package org.dronix.android.unisannio.ateneo;
 
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.R.id;
 import org.dronix.android.unisannio.R.layout;
+import org.dronix.android.unisannio.activity.GBNewsActivity;
+import org.dronix.android.unisannio.activity.UnisannioMapActivity;
 
 import android.app.Activity;
 import android.content.Intent;
