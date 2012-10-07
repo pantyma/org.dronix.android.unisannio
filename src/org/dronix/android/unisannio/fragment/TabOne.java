@@ -26,19 +26,24 @@ import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.R.id;
 import org.dronix.android.unisannio.R.layout;
 import org.dronix.android.unisannio.R.string;
+import org.dronix.android.unisannio.ateneo.AteneoAllegatiActivity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -47,6 +52,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class TabOne extends Fragment {
 	private String URL = "http://www.unisannio.it/notizie/avvisi/index.php";
+	private String URLAllegati = "http://www.unisannio.it/notizie/avvisi/";
 	private ArrayList<News> news;
 	private LazyAdapter mAdapter;
 	private PullToRefreshListView mPullRefreshListView;
@@ -81,6 +87,17 @@ public class TabOne extends Fragment {
 		mAdapter = new LazyAdapter(getActivity(), news);
 
 		actualListView.setAdapter(mAdapter);
+		
+		actualListView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				Log.i("TABONE CLICK ELEMENT", "Click ricevuto in posizione : "+position);
+				Intent i = new Intent(getActivity(), AteneoAllegatiActivity.class);
+				i.putExtra("newsate", news.get(--position));
+				startActivity(i);
+			}
+		});
+		
 		return view;
 	}
 
@@ -98,14 +115,16 @@ public class TabOne extends Fragment {
 					date = dateElement.text();
 				}
 
+				String href =null;
 				String body = null;
 				Element bodyElement = newsItems.get(i).select("a").first();
 				if (bodyElement != null) {
+					href = URLAllegati.concat(bodyElement.attr("href"));
 					body = bodyElement.text();
 				}
 
-				if (date != null && body != null)
-					newsList.add(new News(date, body));
+				if (date != null && body != null && href != null)
+					newsList.add(new News(href,date, body));
 			}
 
 		} catch (SocketException e) {

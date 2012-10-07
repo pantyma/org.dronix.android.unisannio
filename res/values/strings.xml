@@ -38,5 +38,6 @@
     <string name="aule">Gestione aule</string>
     <string name="title_activity_ing_map">Mappa</string>
     <string name="satellite">Satellite ON/OFF</string>
+    <string name="allegati">Allegati</string>
 
 </resources>

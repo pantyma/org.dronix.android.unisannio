@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".ateneo.AteneoHomeActivity" >
         </activity>
+        <activity android:name=".ateneo.AteneoAllegatiActivity" >
+        </activity>
         <activity android:name=".ing.IngEventiActivity" >
         </activity>
         <activity android:name=".activity.UnisannioMapActivity" >

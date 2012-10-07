@@ -15,7 +15,22 @@
  ******************************************************************************/
 package org.dronix.android.unisannio;
 
-public class News {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class News implements Parcelable{
+	
+	public static final Parcelable.Creator<News> CREATOR = new Parcelable.Creator<News>() {
+		public News createFromParcel(Parcel in) {
+			return new News(in);
+		}
+
+		public News[] newArray(int size) {
+			return new News[size];
+		}
+	};
+	
+	private String urlAllegati;
 	private String date;
 	private String body;
 
@@ -23,7 +38,19 @@ public class News {
 		this.date = date;
 		this.body = body;
 	}
+	public News(String id,String date, String body){
+		this.urlAllegati = id;
+		this.date = date;
+		this.body = body;
+	}
 
+	public News(Parcel in) {
+		readFromParcel(in);
+	}
+	public String getUrl() {
+		return urlAllegati;
+	}
+	
 	public String getBody() {
 		return body;
 	}
@@ -38,5 +65,24 @@ public class News {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		dest.writeString(urlAllegati);
+		dest.writeString(date);
+		dest.writeString(body);
+	}
+	
+	private void readFromParcel(Parcel in) {
+		urlAllegati = in.readString();
+		date = in.readString();
+		body = in.readString();
 	}
 }
